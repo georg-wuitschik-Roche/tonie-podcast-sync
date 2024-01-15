@@ -163,7 +163,7 @@ class ToniePodcastSync:
     def __cache_episode(self, ep: Episode) -> bool:
         # local download of a single episode into a subfolder
         # file name is build according to __generateFilename
-        podcast_path = Path("podcasts") / sanitize_filepath(ep.podcast)
+        podcast_path = Path("podcasts") / sanitize_filepath(ep.podcast, platform="universal")
         podcast_path.mkdir(parents=True, exist_ok=True)
 
         fname = podcast_path / self.__generate_filename(ep)
@@ -184,7 +184,7 @@ class ToniePodcastSync:
 
     def __generate_filename(self, ep: Episode) -> str:
         # generates canonical filename for local episode cache
-        return sanitize_filename(f"{ep.published} {ep.title}.mp3")
+        return sanitize_filename(f"{ep.published} {ep.title}.mp3", platform="universal")
 
     def __cleanup_cache(self) -> None:
         console.print("Cleanup the cache folder.")
